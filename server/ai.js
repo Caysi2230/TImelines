@@ -13,7 +13,7 @@ async function generateTimeline(description) {
   const today = new Date().toISOString().slice(0, 10);
 
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-5',
     max_tokens: 4096,
     messages: [{
       role: 'user',
@@ -84,7 +84,7 @@ async function improveTimeline(projectId) {
   }));
 
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-5',
     max_tokens: 4096,
     messages: [{
       role: 'user',
