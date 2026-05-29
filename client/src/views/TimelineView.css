@@ -1,0 +1,146 @@
+.timeline-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.timeline-labels {
+  width: 200px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--gray-200);
+  background: var(--white);
+}
+
+.timeline-header-spacer {
+  height: 36px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.timeline-label-group {
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.timeline-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.timeline-label.milestone-label {
+  height: 36px;
+  font-weight: 500;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.timeline-label.task-label {
+  height: 30px;
+  color: var(--gray-700);
+}
+.timeline-label.task-label.completed { text-decoration: line-through; opacity: 0.6; }
+
+.timeline-scroll {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+.timeline-months {
+  height: 36px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.timeline-month {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-500);
+  padding: 0 8px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.timeline-grid {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.grid-week {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--gray-100);
+}
+
+.grid-today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(200, 0, 0, 0.3);
+}
+
+.timeline-row-group {}
+
+.timeline-row {
+  position: relative;
+  border-bottom: 1px solid var(--gray-50);
+}
+
+.milestone-row {
+  height: 36px;
+  background: var(--gray-50);
+}
+
+.task-row-tl {
+  height: 30px;
+}
+
+.milestone-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.task-bar {
+  position: absolute;
+  top: 5px;
+  height: 20px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: opacity 0.15s;
+  z-index: 1;
+}
+.task-bar:hover { opacity: 0.85; }
+
+.task-bar.priority-high { background: #333; }
+.task-bar.priority-medium { background: #666; }
+.task-bar.priority-low { background: #999; }
+.task-bar.bar-done { opacity: 0.4; }
+.task-bar.bar-overdue { background: #c00000; }
