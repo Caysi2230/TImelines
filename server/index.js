@@ -18,19 +18,23 @@ app.use('/api/ai', require('./routes/ai'));
 app.use('/api/export', require('./routes/export'));
 app.use('/api/email', require('./routes/email'));
 
-// Serve built frontend in production; in dev, Vite proxy handles it
+// Always serve built frontend (Railway builds it before starting)
 const clientDist = path.join(__dirname, '..', 'client', 'dist');
 const fs = require('fs');
 if (fs.existsSync(clientDist)) {
   app.use(express.static(clientDist));
-  app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(clientDist, 'index.html'));
+    }
+  });
 }
 
-app.listen(PORT, () => {
-  console.log(`\n  Timeline server running at http://localhost:${PORT}\n`);
-  if (process.env.NODE_ENV !== 'production') {
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n  Timeline server running at http://0.0.0.0:${PORT}\n`);
+  if (!process.env.RAILWAY_ENVIRONMENT && process.env.NODE_ENV !== 'production') {
     const { exec } = require('child_process');
-    const url = 'http://localhost:3001';
+    const url = `http://localhost:${PORT}`;
     const cmd = process.platform === 'darwin' ? `open ${url}` :
                 process.platform === 'win32' ? `start ${url}` : `xdg-open ${url}`;
     exec(cmd, () => {});
